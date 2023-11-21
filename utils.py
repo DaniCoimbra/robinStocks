@@ -1,6 +1,5 @@
 import stock
 import robin_stocks.robinhood as r
-import time
 def ratio(p1, p2):
     return float(p1)/float(p2)
 
@@ -12,7 +11,7 @@ def calculateLoss(stock1):
 
 def performance():
     holdings = r.account.get_open_stock_positions()
-    tickers = [r.get_symbol_by_url(item["instrument"]) for item in holdings]
+    #tickers = [r.get_symbol_by_url(item["instrument"]) for item in holdings]
     tickers = ['ICLN', 'SPHD']
     quantities = [float(item["quantity"]) for item in holdings]
     prevClose = r.get_quotes(tickers, "previous_close")

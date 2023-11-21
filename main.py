@@ -32,10 +32,10 @@ margin = 0.0001
 loss = 0.00
 lossLimit = 25.00
 
-loss = initialPerformance = utils.performance()
+loss = abs(utils.performance())
 
-print("initial performance: ", end="")
-print(initialPerformance)
+print("initial loss: ", end="")
+print(loss)
 
 initialRatio = utils.ratio(s1.getPrice(),s2.getPrice())
 
@@ -62,7 +62,7 @@ while(loss < lossLimit):
             loss = abs(performance)
 
         for j in range(60):
-            print("\rTime for next transaction: {} seconds.".format(300- (60*i + j)), end='')
+            print("\rTime for next transaction: {} seconds.".format(300 - (60*i + j)), end='')
             time.sleep(1)
 
 
