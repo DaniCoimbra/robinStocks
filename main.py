@@ -88,7 +88,8 @@ while(loss < lossLimit):
             s2.sell(2)
             s1.buy(2)
 
-        initialRatio = ratio
+        initialRatio = utils.ratio(s1.getLatestPrice(),s2.getLatestPrice())
+
     else:
         print("Margin not exceeded")
 
