@@ -18,10 +18,10 @@ class Stock:
 
     def buy(self, price):
         order = r.orders.order_buy_fractional_by_price(self.stockName, price)
-        self.cost -= order.price()
+        self.cost += order.price()
         self.units += order.quantity()
 
     def sell(self, price):
         order = r.orders.order_sell_fractional_by_price(self.stockName, price)
-        self.cost += order.quantity()
+        self.cost -= order.price()
         self.units -= order.quantity()

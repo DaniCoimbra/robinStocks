@@ -66,7 +66,6 @@ while(loss < lossLimit):
 
     ratioDif = utils.ratioDif(s1, s2, initialRatio)
 
-    # time.sleep(600)
     print()
     print(s1.stockName + " price: " + s1.getLatestPrice())
     print(s2.stockName + " price: " + s2.getLatestPrice())
