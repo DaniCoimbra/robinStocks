@@ -32,21 +32,16 @@ margin = 0.0001
 loss = 0.00
 lossLimit = 25.00
 
-# loss = abs(utils.performance(stocks))
-# print("initial loss: ", end="")
-# print(loss)
-
-initialRatio = utils.ratio(s1.getLatestPrice(),s2.getLatestPrice())
-
-print("initial ratio between stocks: ", end="")
-print(initialRatio)
-
 print("initial " + s1.stockName + " price: " + s1.getLatestPrice())
 print("initial " + s2.stockName + " price: " + s2.getLatestPrice())
 
-#print(r.account.load_account_profile())
+initialRatio = utils.ratio(s1.getLatestPrice(),s2.getLatestPrice())
+print("initial ratio between stocks: ", end="")
+print(initialRatio)
+
 
 print()
+
 s1.buy(50)
 s2.buy(50)
 
@@ -92,6 +87,6 @@ while(loss < lossLimit):
     else:
         print("Margin not exceeded")
 
-print("End")
+print("Finished")
 
 
