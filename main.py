@@ -5,9 +5,8 @@ from stock import Stock
 import utils
 import pyotp
 
-
 totp = pyotp.TOTP("My2factorAppHere").now()
-login = r.authentication.login(env.username,env.password, mfa_code=totp)
+login = r.authentication.login(env.username,env.password, store_session=True, mfa_code=totp)
 #login = r.authentication.login(env.username,env.password, store_session=False, mfa_code=totp)
 
 my_stocks = r.build_holdings()
@@ -26,7 +25,7 @@ s2 = Stock(stock2)
 stocks = [stock1,stock2]
 
 #ratio margin
-margin = 0.0001
+margin = 0.001
 
 #starting loss and loss limit
 loss = 0.00
@@ -39,7 +38,6 @@ initialRatio = utils.ratio(s1.getLatestPrice(),s2.getLatestPrice())
 print("initial ratio between stocks: ", end="")
 print(initialRatio)
 
-
 print()
 
 s1.buy(50)
@@ -48,6 +46,8 @@ s2.buy(50)
 while(loss < lossLimit):
     print("Current Loss: ", end="")
     print(loss)
+    lastPriceS1 = s1.getLatestPrice()
+    lastPriceS2 = s2.getLatestPrice()
 
     for i in range(5):
         performance = utils.performance(s1, s2)
@@ -73,7 +73,7 @@ while(loss < lossLimit):
     # most expensive stock and sell cheaper one
     if ratioDif >= margin:
         print("Margin exceeded")
-        if s1.getLatestPrice() > s2.getLatestPrice():
+        if s1.getLatestPriceDif(lastPriceS1) > s2.getLatestPriceDif(lastPriceS2):
             print("Bought $2 of " + s1.stockName + "and Sold $2 of " + s2.stockName)
             s1.buy(2)
             s2.sell(2)
