@@ -25,7 +25,7 @@ s2 = Stock(stock2)
 stocks = [stock1,stock2]
 
 #ratio margin
-margin = 0.001
+margin = 0.0001
 
 #starting loss and loss limit
 loss = 0.00
@@ -39,9 +39,12 @@ print("initial ratio between stocks: ", end="")
 print(initialRatio)
 
 print()
-
-s1.buy(50)
-s2.buy(50)
+s1.units+=float(my_stocks["ICLN"]["quantity"])
+s1.cost+=float(50)
+s2.units+=float(my_stocks["SPHD"]["quantity"])
+s2.cost+=float(50)
+#s1.buy(50)
+#s2.buy(50)
 
 while(loss < lossLimit):
     print("Current Loss: ", end="")
@@ -65,7 +68,7 @@ while(loss < lossLimit):
     print(s1.stockName + " price: " + s1.getLatestPrice())
     print(s2.stockName + " price: " + s2.getLatestPrice())
 
-    print("Ratio difference between previous and current period: ", end="")
+    print("Stocks Ratio difference between previous and current period: ", end="")
     print(ratioDif)
     print()
 
@@ -74,11 +77,11 @@ while(loss < lossLimit):
     if ratioDif >= margin:
         print("Margin exceeded")
         if s1.getLatestPriceDif(lastPriceS1) > s2.getLatestPriceDif(lastPriceS2):
-            print("Bought $2 of " + s1.stockName + "and Sold $2 of " + s2.stockName)
+            print("Bought $2 of " + s1.stockName + " and Sold $2 of " + s2.stockName)
             s1.buy(2)
             s2.sell(2)
         else:
-            print("Bought $2 of " + s2.stockName + "and Sold $2 of " + s1.stockName)
+            print("Bought $2 of " + s2.stockName + " and Sold $2 of " + s1.stockName)
             s2.sell(2)
             s1.buy(2)
 
@@ -86,6 +89,7 @@ while(loss < lossLimit):
 
     else:
         print("Margin not exceeded")
+    print()
 
 print("Finished")
 

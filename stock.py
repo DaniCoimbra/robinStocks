@@ -18,13 +18,14 @@ class Stock:
 
     def buy(self, price):
         order = r.orders.order_buy_fractional_by_price(self.stockName, price)
-        self.cost += order["price"]
-        self.units += order["quantity"]
+        self.cost += float(price)
+        self.units += float(order["quantity"])
 
     def sell(self, price):
         order = r.orders.order_sell_fractional_by_price(self.stockName, price)
-        self.cost -= order.price()
-        self.units -= order.quantity()
+        self.cost -= float(price)
+        self.units -= float(order["quantity"])
+
 
     def getLatestPriceDif(self, lastPrice):
-        return self.getLatestPrice() - lastPrice
+        return float(self.getLatestPrice()) - float(lastPrice)
